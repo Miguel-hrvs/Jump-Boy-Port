@@ -533,13 +533,15 @@ public final class b implements Runnable, KeyListener {
 	}
 
 	private void c() {
-		this.ak = 0;
-		try {
-			byte[] data = getBytesFromSave();
-			ak = data[0];
-		} catch (Exception ex) {
-			ex.printStackTrace();
-		}
+	    this.ak = 0;
+	    try {
+	        byte[] data = getBytesFromSave();
+	        if (data != null && data.length > 0) {
+	            ak = data[0];
+	        }
+	    } catch (Exception ex) {
+	        ex.printStackTrace();
+	    }
 	}
 
 	private static boolean d() {
