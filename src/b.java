@@ -543,13 +543,11 @@ public final class b implements Runnable, KeyListener {
 	}
 
 	private static boolean d() {
-		DataInputStream data;
-		try {
-			data = new DataInputStream(new BufferedInputStream(new FileInputStream(new File("res/data/data.bin"))));
-			byte b = getBytesFromSave()[0];
-			if (b == (byte) 0xFF) {
-				return false;
-			}
+		try (DataInputStream data = new DataInputStream(new BufferedInputStream(new FileInputStream(new File("res/data/data.bin"))));) {
+    			byte b = getBytesFromSave()[0];
+    			if (b == (byte) 0xFF) {
+        		return false;
+    			}
 		} catch (Exception e) {
 			e.printStackTrace();
 			return false;
