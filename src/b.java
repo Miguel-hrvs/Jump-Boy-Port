@@ -1400,31 +1400,33 @@ public final class b implements Runnable, KeyListener {
 	}
 
 	private void g() {
-		try {
-			byte[] scores = getBytesFromSave();
-			for (int j = 0; j < 5; j++) {
-				int b1 = scores[(2 + 4 * j)] & 0xFF;
-				int b2 = scores[(2 + 4 * j) + 1] & 0xFF;
-				int b3 = scores[(2 + 4 * j) + 2] & 0xFF;
-				int b4 = scores[(2 + 4 * j) + 3] & 0xFF;
-				int score = (b1 << 24) | (b2 << 16) | (b3 << 8) | b4;
-				this.rankings[j] = score;
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+	    try {
+	        byte[] scores = getBytesFromSave();
+	        if (scores != null && scores.length >= (2 + 4 * 5)) {
+	            for (int j = 0; j < 5; j++) {
+	                int b1 = scores[(2 + 4 * j)] & 0xFF;
+	                int b2 = scores[(2 + 4 * j) + 1] & 0xFF;
+	                int b3 = scores[(2 + 4 * j) + 2] & 0xFF;
+	                int b4 = scores[(2 + 4 * j) + 3] & 0xFF;
+	                int score = (b1 << 24) | (b2 << 16) | (b3 << 8) | b4;
+	                this.rankings[j] = score;
+	            }
+	        }
+	    } catch (Exception e) {
+	        e.printStackTrace();
+	    }
 
-		// sorts out and puts into ranking array
-		int n = 0;
-		for (int i = 0; i < 4; ++i) {
-			for (int j = 0; j < 4 - i; ++j) {
-				if (this.rankings[j] < this.rankings[j + 1]) {
-					n = this.rankings[j];
-					this.rankings[j] = this.rankings[j + 1];
-					this.rankings[j + 1] = n;
-				}
-			}
-		}
+	    // sorts out and puts into ranking array
+	    int n = 0;
+	    for (int i = 0; i < 4; ++i) {
+	        for (int j = 0; j < 4 - i; ++j) {
+	            if (this.rankings[j] < this.rankings[j + 1]) {
+	                n = this.rankings[j];
+	                this.rankings[j] = this.rankings[j + 1];
+	                this.rankings[j + 1] = n;
+	            }
+	        }
+	    }
 	}
 
 	private void saveNewScore(final int newScore) {
