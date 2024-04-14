@@ -673,13 +673,16 @@ public final class b implements Runnable, KeyListener {
 	}
 	
 	public static byte[] getBytesFromSave() {
-		byte[] data = null;
-		try {
-			data = Files.readAllBytes(Paths.get(b.class.getResource("/data/data.bin").toURI()));
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return data;
+	    byte[] data = null;
+	    try {
+	        InputStream inputStream = b.class.getResourceAsStream("/data/data.bin");
+	        if (inputStream != null) {
+	            data = inputStream.readAllBytes();
+	        }
+	    } catch (Exception e) {
+	        e.printStackTrace();
+	    }
+	    return data;
 	}
 
 	private void render() {
