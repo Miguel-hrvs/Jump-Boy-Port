@@ -519,17 +519,19 @@ public final class b implements Runnable, KeyListener {
 	}
 
 	private void b_void() {
-		byte tmp = (byte) aj[al];
-		ak = tmp;
-		try {
-			byte[] data = getBytesFromSave();
-			data[0] = ak;
-			FileOutputStream write_data = new FileOutputStream(new File("res/data/data.bin"));
-			write_data.write(data);
-			write_data.close();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+	    byte tmp = (byte) aj[al];
+	    ak = tmp;
+	    try {
+	        byte[] data = getBytesFromSave();
+	        if (data != null) {
+	            data[0] = ak;
+	            FileOutputStream write_data = new FileOutputStream(new File("res/data/data.bin"));
+	            write_data.write(data);
+	            write_data.close();
+	        }
+	    } catch (Exception e) {
+	        e.printStackTrace();
+	    }
 	}
 
 	private void c() {
